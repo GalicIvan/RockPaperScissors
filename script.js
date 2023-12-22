@@ -3,6 +3,8 @@ let playerSelection
 let computerSelection
 let playerScore = 0
 let computerScore = 0
+let divAnswer = document.createElement('div')
+const container = document.querySelector('.container')
 
 function getComputerChoice() {
     let choices = ["rock", "paper", "scissors"]
@@ -64,20 +66,21 @@ buttonScissors.addEventListener('click', () => {
 })
 
 function game() {
-    
-//    for (let i = 0; i < 5; i++) {
-//        let playerSelection = prompt("Input your answer: ")
-        const computerSelection = getComputerChoice()
-        playRound(playerSelection, computerSelection)
+    const computerSelection = getComputerChoice()
+    playRound(playerSelection, computerSelection)
 
-        if (answer == "you win") {
-            playerScore++
-        } else if (answer == "you lose") {
-            computerScore++
-        }
-        let message = `You answered ${playerSelection} and computer answered ${computerSelection}. Score is ${playerScore} and ${answer} this round!`
-        console.log(message)
+    if (answer == "you win") {
+        playerScore++
+    } else if (answer == "you lose") {
+        computerScore++
     }
+    let message = `You answered ${playerSelection} and computer answered ${computerSelection}. Score is ${playerScore} and ${answer} this round!`
+    divAnswer.textContent = message
+    container.appendChild(divAnswer)
 
-//}
-console.log(game()) 
+    if (playerScore == 5) {
+        divAnswer.textContent = `You Win this round!!! You had 5 and computer had ${computerScore}`
+    } else if (computerScore == 5) {
+        divAnswer.textContent = `you lose this round... Computer had 5, and you had ${playerScore} `
+    }
+}
